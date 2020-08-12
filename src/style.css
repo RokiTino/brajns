@@ -1,0 +1,62 @@
+
+*{
+    box-sizing: border-box;
+    margin: 10px;
+    padding: 10px;
+  }
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1,4;
+  }
+  .autocomplete {
+    position: relative;
+    width: 130px;
+  }
+  #license{
+    position: relative;
+    width: 100%;
+  }
+  .autocomplete-results {
+    padding: 0;
+    margin: 0;
+    border: 1px solid #eeeeee;
+    height: 120px;
+    overflow: auto;
+  }
+
+  .autocomplete-result {
+    list-style: none;
+    text-align: left;
+    padding: 4px 2px;
+    cursor: pointer;
+  }
+ 
+  .autocomplete-result:hover {
+    background-color: #4AAE9B;
+    color: white;
+  }
+
+#app {
+  max-width: 30em;
+  margin: 1em auto;
+}
+
+#app .dropdown li {
+  border-bottom: 1px solid rgba(112, 128, 144, 0.1)
+}
+
+#app .dropdown li:last-child {
+  border-bottom: none;
+}
+
+#app .dropdown li a {
+  padding: 10px 20px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  font-size: 1.25em;
+}
+
+#app .dropdown li a .fa {
+  padding-right: 0.5em;
+}
