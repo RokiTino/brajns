@@ -11,7 +11,7 @@
           <multiselect id="dropdown" v-model="value" :options="options" :searchable="false" :close-on-select="true" :show-labels="true" placeholder="Select a Type"></multiselect>
          
           <h3>Enter the model</h3>
-          <autocomplete  :source="[{id:1,name:'Audi'},{id:2,name:'BMW'},{id:3,name:'Citroen'},{id:4,name:'Honda'},{id:5,name:'Hyundai'},{id:6,name:'Mercedes'},{id:7,name:'Nissan'},{id:8,name:'Opel'},{id:9,name:'Suzuki'},{id:10,name:'Toyota'},{id:11,name:'VolksWagen'}]" v-if="this.id == null" value='unknown'></autocomplete>
+          <autocomplete id="model" :source="[{id:1,name:'Audi'},{id:2,name:'BMW'},{id:3,name:'Citroen'},{id:4,name:'Honda'},{id:5,name:'Hyundai'},{id:6,name:'Mercedes'},{id:7,name:'Nissan'},{id:8,name:'Opel'},{id:9,name:'Suzuki'},{id:10,name:'Toyota'},{id:11,name:'VolksWagen'}]" v-if="this.id == null" value='unknown'></autocomplete>
          
           <h3>Enter the License Plate</h3>
           <input type="text" class="licenceplate" id="license" value="" placeholder="Please enter in this format XX-NNN-XX">
@@ -33,13 +33,16 @@
 import Autocomplete from 'vuejs-auto-complete'
 import Multiselect from 'vue-multiselect'
 import Vuelidate from 'vuelidate'
+import vehicles from 'Vehicles/vehicle.js'
+
 export default {
   name: 'App',
   components: {
   // VueDropdown,
   Multiselect,
   Autocomplete,
-  Vuelidate  
+  Vuelidate,  
+  Vehicles
 },
   _data: {
     form: {
@@ -85,9 +88,18 @@ export default {
   methods:{
     storeMethod:function(){
       let VehicleNameLocal =  document.getElementById("VehicleName").value ;
-      this.VehicleName = VehicleNameLocal;
+      Object.defineProperty(this,VehicleName ,{
+        set() {
+          vehicles.vehicleName = VehicleNameLocal;
+        }
+      });
       let VehicleType = document.getElementsByClassName("dropdown").value;
-      this.VehicleType = VehicleType;
+      Object.defineProperty(this,VehicleType ,{
+        set() {
+          vehicles.vehicleType = VehicleType;
+        }
+      });
+      let Model = document.getElementById("model").value;
     },
     checkForm:function(e) {
       if(this.VehicleName && this.VehicleType && this.Model && this.LicensePlate && this.LastRegistration && this.DateofRegistration ) return true;
@@ -105,68 +117,4 @@ export default {
 }
 </script>
 
-<style>
-  *{
-    box-sizing: border-box;
-    margin: 10px;
-    padding: 10px;
-  }
-  body {
-    font-family: Arial, Helvetica, sans-serif;
-    line-height: 1,4;
-  }
-  .autocomplete {
-    position: relative;
-    width: 130px;
-  }
-  #license{
-    position: relative;
-    width: 100%;
-  }
-  .autocomplete-results {
-    padding: 0;
-    margin: 0;
-    border: 1px solid #eeeeee;
-    height: 120px;
-    overflow: auto;
-  }
-
-  .autocomplete-result {
-    list-style: none;
-    text-align: left;
-    padding: 4px 2px;
-    cursor: pointer;
-  }
- 
-  .autocomplete-result:hover {
-    background-color: #4AAE9B;
-    color: white;
-  }
-
-#app {
-  max-width: 30em;
-  margin: 1em auto;
-}
-
-#app .dropdown li {
-  border-bottom: 1px solid rgba(112, 128, 144, 0.1)
-}
-
-#app .dropdown li:last-child {
-  border-bottom: none;
-}
-
-#app .dropdown li a {
-  padding: 10px 20px;
-  display: flex;
-  width: 100%;
-  align-items: center;
-  font-size: 1.25em;
-}
-
-#app .dropdown li a .fa {
-  padding-right: 0.5em;
-}
-
-  
-</style>
+<style src="style.css"></style>
