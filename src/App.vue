@@ -108,8 +108,8 @@ export default {
         console.log(this.VehicleName);
       }
       this.errors = [];
-       if(!this.VehicleName) this.errors.push("Name required.");
-      if(!this.VehicleType) this.errors.push("Age required.");
+       if(!this.VehicleName) this.errors.push("Vehicle Name is required.");
+      if(!this.VehicleType) this.errors.push("Vehicle Type is required.");
       e.preventDefault();
     }
   }
